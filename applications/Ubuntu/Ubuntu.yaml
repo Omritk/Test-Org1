@@ -1,0 +1,31 @@
+# Ubuntu app
+
+---
+
+spec_version: 1
+kind: application
+
+infrastructure:
+  connectivity:
+    external:
+      - port_info:
+          port: 22
+  compute:
+    spec:
+      azure:
+        vm_size: Standard_D2a_v4
+
+configuration:
+  healthcheck:
+    script: Ubuntu.sh
+    #wait_for_ports: ALL
+    timeout: 10
+source:
+  image:
+    azure_image:
+    - urn: Canonical:UbuntuServer:16.04-LTS:latest
+      username: adminuser
+  os_type: linux
+
+debugging:
+  connection_protocol: SSH
